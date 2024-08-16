@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y DOM</title>
+</head>
+<body>
+   <form id="myform">
+    <label for="name">Nombre: </label>
+    <input type="text" id="name" name="name" required>
+    <br>
+    <label for="email">Email: </label>
+    <input type="text" id="email" name="email" required>
+    <br>
+    <button type="submit">Enviar</button>
+   </form>
+
+   <h2>Datos del Formulario: </h2>
+   <p id="formData"></p>
+   
+   <script>
+    // Array para almacenar los datos enviados
+    let datosFormulario = [];
+
+    document.getElementById("myform").addEventListener("submit", function(event) {
+        event.preventDefault();
+        enviar();
+    });
+
+    function enviar() {
+        // Obtener los valores de nombre y email
+        let nombre = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+
+        // Agregar los valores al array
+        datosFormulario.push({ nombre: nombre, email: email });
+
+        // Actualizar la visualización de los datos
+        let contenido = "";
+        datosFormulario.forEach(function(dato, index) {
+            contenido += `${index + 1}. Nombre: ${dato.nombre}, Email: ${dato.email}<br>`;
+        });
+
+        document.getElementById("formData").innerHTML = contenido;
+    }
+   </script>
+</body>
+</html>
